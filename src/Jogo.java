@@ -8,17 +8,24 @@ public class Jogo {
     private final List<List<Integer>> pecas = new ArrayList<>();
     private List<Jogador> jogadores = new ArrayList<>();
     private Tabuleiro tabuleiro;
+    private Jogador vencedor = null;
+
+    private int rodada = 1;
 
     public Jogo(boolean dummyGame) {
         this.tabuleiro = new Tabuleiro();
         if (dummyGame) {
             for (int i = 0; i < 4; i++) {
-                Jogador jogador = new JogadorBurro();
+                Jogador jogador = new JogadorBurro(i);
                 jogadores.add(jogador);
             }
         }
         geraPecas();
         distribuiPecas();
+    }
+
+    public Jogador getVencedor() {
+        return vencedor;
     }
 
     private void geraPecas() {
@@ -31,21 +38,10 @@ public class Jogo {
         }
     }
 
-    public void distribuiPecas() {
+    private void distribuiPecas() {
         Collections.shuffle(pecas);
         for (int i = 0; i < pecas.size(); i++) {
             jogadores.get(i % 4).pegaPeca(pecas.get(i));
-        }
-    }
-
-    public void rodada() {
-        for (Jogador jogador : jogadores) {
-            if (jogador.getPrimeiroJogador() && jogador.olhaMao().size() == 6) {
-                continue;
-            }
-            if (Regras.temPecaJogavel(jogador, tabuleiro)) {
-                jogada(jogador);
-            }
         }
     }
 
@@ -60,19 +56,42 @@ public class Jogo {
 
     }
 
+    public Jogador rodada() {
+        for (Jogador jogador : jogadores) {
+            if (jogador.getPrimeiroJogador() && rodada == 1) {
+                continue;
+            }
+            if (Regras.vencedorMaoVazia(jogador)) {
+                this.fimJogo = true;
+                return jogador;
+            }
+
+            if (Regras.temPecaJogavel(jogador, tabuleiro)) {
+                jogada(jogador);
+            }
+        }
+        rodada++;
+        return null;
+    }
+
     public void rolandoJogo() {
+
         Jogador primeiroJogador = jogadores.get(0);
         List<Integer> primeiraPeca = Regras.primeiraJogada(primeiroJogador);
         tabuleiro.adicionaPeca(primeiraPeca);
         primeiroJogador.tiraPeca(primeiraPeca);
         primeiroJogador.setPrimeiroJogador(true);
+
         while (!fimJogo) {
-            rodada();
+            vencedor = rodada();
+            if (vencedor != null) {
+                break;
+            }
             verificaFimJogo();
-            primeiroJogador.setPrimeiroJogador(false);
         }
-        // System.out.println("Fim de jogo.");
-        // System.out.println(tabuleiro.getPecasNaMesa());
+        if (vencedor == null) {
+            vencedor = Regras.vencedorPorPontos(jogadores);
+        }
     }
 
     public void verificaFimJogo() {

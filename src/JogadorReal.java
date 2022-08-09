@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JogadorReal implements Jogador {
+    private int id = -1;
     private List<List<Integer>> pecasJogador = new ArrayList<>();
     private boolean primeiroJogador;
 
@@ -33,5 +34,14 @@ public class JogadorReal implements Jogador {
     @Override
     public boolean getPrimeiroJogador() {
         return primeiroJogador;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    public List<List<Integer>> getPecasJogador() {
+        return pecasJogador;
     }
 }

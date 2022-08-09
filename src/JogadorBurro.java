@@ -2,11 +2,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JogadorBurro implements Jogador {
+    private int id;
+
     private List<List<Integer>> pecasJogador = new ArrayList<>();
     private boolean primeiroJogador;
 
-    public JogadorBurro() {
+    public JogadorBurro(int id) {
         this.primeiroJogador = false;
+        this.id = id;
+
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -37,5 +46,10 @@ public class JogadorBurro implements Jogador {
     @Override
     public boolean getPrimeiroJogador() {
         return primeiroJogador;
+    }
+
+    @Override
+    public String toString() {
+        return "Jogador " + this.id;
     }
 }

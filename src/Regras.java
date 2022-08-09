@@ -52,4 +52,32 @@ public class Regras {
         return true;
     }
 
+    public static boolean vencedorMaoVazia(Jogador jogador) {
+        if (jogador.olhaMao().isEmpty()) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public static Jogador vencedorPorPontos(List<Jogador> jogadores) {
+        Jogador possivelVencedor = jogadores.get(0);
+        int menorPontuacao = somaPontos(possivelVencedor);
+
+        for (Jogador jogador : jogadores) {
+            int somaPontos = somaPontos(jogador);
+
+            if (somaPontos < menorPontuacao) {
+                possivelVencedor = jogador;
+                menorPontuacao = somaPontos;
+            }
+        }
+        return possivelVencedor;
+
+    }
+
+    private static int somaPontos(Jogador jogador) {
+        return jogador.olhaMao().stream().map((peca) -> (peca.get(0) + peca.get(1))).reduce(0, Integer::sum);
+    }
+
 }
