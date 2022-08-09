@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Regras {
 
-    public static List<Integer> primeiraJogada(Jogador jogador) {
+    public static List<Integer> primeiraPecaJogada(Jogador jogador) {
         int maiorSomaPeca = 0;
         List<Integer> maiorPeca = new ArrayList<>();
         for (List<Integer> peca : jogador.olhaMao()) {
@@ -20,6 +20,10 @@ public class Regras {
     }
 
     public static boolean validaPeca(List<Integer> peca, Tabuleiro tabuleiro) {
+        if (tabuleiro.getPecasNaMesa().isEmpty()) {
+            return true;
+        }
+
         Integer cabeca = tabuleiro.getCabeca();
         Integer rabo = tabuleiro.getRabo();
 
@@ -42,14 +46,14 @@ public class Regras {
         return false;
     }
 
-    public boolean rodadaNaoPossivel(Tabuleiro tabuleiro, List<Jogador> jogadores) {
+    public static boolean rodadaPossivel(Tabuleiro tabuleiro, List<Jogador> jogadores) {
         for (Jogador jogador : jogadores) {
             if (Regras.temPecaJogavel(jogador, tabuleiro)) {
-                return false;
+                return true;
 
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean vencedorMaoVazia(Jogador jogador) {

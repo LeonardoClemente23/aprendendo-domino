@@ -24,40 +24,70 @@ public class Jogo {
         distribuiPecas();
     }
 
+    public Tabuleiro getTabuleiro() {
+        return this.tabuleiro;
+    }
+
+    public List<Jogador> getJogadores() {
+        return this.jogadores;
+    }
+
     public Jogador getVencedor() {
-        return vencedor;
+        return this.vencedor;
     }
 
     private void geraPecas() {
         for (int i = 0; i < 7; i++) {
             for (int j = 6; j >= i; j--) {
                 List<Integer> peca = Arrays.asList(i, j);
-                pecas.add(peca);
+                this.pecas.add(peca);
 
             }
         }
     }
 
     private void distribuiPecas() {
-        Collections.shuffle(pecas);
-        for (int i = 0; i < pecas.size(); i++) {
-            jogadores.get(i % 4).pegaPeca(pecas.get(i));
+        Collections.shuffle(this.pecas);
+        for (int i = 0; i < this.pecas.size(); i++) {
+            this.jogadores.get(i % 4).pegaPeca(this.pecas.get(i));
         }
     }
 
-    public void jogada(Jogador jogador) {
+    private List<Integer> pecaJogada(Jogador jogador) {
         for (List<Integer> possivelPeca : jogador.olhaMao()) {
             if (Regras.validaPeca(possivelPeca, tabuleiro)) {
-                tabuleiro.adicionaPeca(possivelPeca);
-                jogador.tiraPeca(possivelPeca);
-                break;
+                return possivelPeca;
             }
+        }
+        return null;
+    }
+
+    private void colocaPecaTabuleiro(Jogador jogador, List<Integer> peca) {
+        if (Regras.validaPeca(peca, tabuleiro)) {
+            this.tabuleiro.adicionaPeca(peca);
+            jogador.tiraPeca(peca);
         }
 
     }
 
-    public Jogador rodada() {
-        for (Jogador jogador : jogadores) {
+    private void jogada(Jogador jogador) {
+        List<Integer> peca = pecaJogada(jogador);
+        if (peca != null) {
+            colocaPecaTabuleiro(jogador, peca);
+        }
+
+    }
+
+    private void primeiraJogada() {
+        Jogador primeiroJogador = this.jogadores.get(0);
+        List<Integer> primeiraPeca = Regras.primeiraPecaJogada(primeiroJogador);
+
+        colocaPecaTabuleiro(primeiroJogador, primeiraPeca);
+        primeiroJogador.setPrimeiroJogador(true);
+    }
+
+    private Jogador rodada() {
+        for (Jogador jogador : this.jogadores) {
             if (jogador.getPrimeiroJogador() && rodada == 1) {
                 continue;
             }
@@ -66,21 +96,24 @@ public class Jogo {
                 return jogador;
             }
 
-            if (Regras.temPecaJogavel(jogador, tabuleiro)) {
+            if (Regras.temPecaJogavel(jogador, this.tabuleiro)) {
                 jogada(jogador);
             }
         }
-        rodada++;
+        this.rodada++;
         return null;
     }
 
-    public void rolandoJogo() {
+    private void verificaFimJogo() {
+        this.fimJogo = true;
+        if (Regras.rodadaPossivel(tabuleiro, jogadores)) {
+            this.fimJogo = false;
+            return;
+        }
+    }
 
-        Jogador primeiroJogador = jogadores.get(0);
-        List<Integer> primeiraPeca = Regras.primeiraJogada(primeiroJogador);
-        tabuleiro.adicionaPeca(primeiraPeca);
-        primeiroJogador.tiraPeca(primeiraPeca);
-        primeiroJogador.setPrimeiroJogador(true);
+    public void rolandoJogo() {
+        primeiraJogada();
 
         while (!fimJogo) {
             vencedor = rodada();
@@ -92,24 +125,6 @@ public class Jogo {
         if (vencedor == null) {
             vencedor = Regras.vencedorPorPontos(jogadores);
         }
-    }
-
-    public void verificaFimJogo() {
-        this.fimJogo = true;
-        for (Jogador jogador : jogadores) {
-            if (Regras.temPecaJogavel(jogador, tabuleiro)) {
-                this.fimJogo = false;
-                break;
-            }
-        }
-    }
-
-    public Tabuleiro getTabuleiro() {
-        return tabuleiro;
-    }
-
-    public List<Jogador> getJogadores() {
-        return jogadores;
     }
 
 }
