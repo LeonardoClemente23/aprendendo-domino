@@ -7,7 +7,7 @@ public class App {
     public static void main(String[] args) {
         long contador = 0;
         Map<Integer, Integer> placar = new HashMap<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             placar.put(i, 0);
         }
         long inicio = System.currentTimeMillis();

@@ -15,7 +15,7 @@ public class Jogo {
     public Jogo(boolean dummyGame) {
         this.tabuleiro = new Tabuleiro();
         if (dummyGame) {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 1; i <= 4; i++) {
                 Jogador jogador = new JogadorBurro(i);
                 jogadores.add(jogador);
             }
@@ -63,10 +63,8 @@ public class Jogo {
     }
 
     private void colocaPecaTabuleiro(Jogador jogador, List<Integer> peca) {
-        if (Regras.validaPeca(peca, tabuleiro)) {
-            this.tabuleiro.adicionaPeca(peca);
-            jogador.tiraPeca(peca);
-        }
+        this.tabuleiro.adicionaPeca(peca);
+        jogador.tiraPeca(peca);
 
     }
 
