@@ -9,8 +9,12 @@ public class Jogo {
     private List<Jogador> jogadores = new ArrayList<>();
     private Tabuleiro tabuleiro;
     private Jogador vencedor = null;
-
     private int rodada = 1;
+    private boolean vitoriaMaoVazia;
+
+    public boolean isVitoriaMaoVazia() {
+        return vitoriaMaoVazia;
+    }
 
     public Jogo(boolean dummyGame) {
         this.tabuleiro = new Tabuleiro();
@@ -116,13 +120,16 @@ public class Jogo {
         while (!fimJogo) {
             vencedor = rodada();
             if (vencedor != null) {
+                vitoriaMaoVazia = true;
                 break;
             }
             verificaFimJogo();
         }
         if (vencedor == null) {
+            vitoriaMaoVazia = false;
             vencedor = Regras.vencedorPorPontos(jogadores);
         }
+
     }
 
 }

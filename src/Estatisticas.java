@@ -1,21 +1,89 @@
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Estatisticas {
     // Contabiliza quantidade de vitorias de cada jogador e o tipo de vitoria,
     // por mão vazia ou por pontos.
+    private static Map<Integer, Map<Boolean, Integer>> placar = new HashMap<>();
+    private static Map<Boolean, Integer> tiposVitorias = new HashMap<>();
 
-    // ((Jogador),(Vitorias MV, vitórias Pontos)).
-    private Map<Jogador, Map<String, Integer>> placar = new HashMap<>();
-    private Map<String, Integer> tiposVitorias = new HashMap<>();
+    public Estatisticas() {
+        tiposVitorias.put(true, 0);
+        tiposVitorias.put(false, 0);
+        for (int jogadorId = 1; jogadorId <= 4; jogadorId++) {
+            Map<Boolean, Integer> tiposVitoriasJogador = new HashMap<>();
+            tiposVitoriasJogador.put(true, 0);
+            tiposVitoriasJogador.put(false, 0);
+            placar.put(jogadorId, tiposVitoriasJogador);
+        }
+    }
 
-    public Estatisticas(List<Jogador> jogadores) {
-        tiposVitorias.put("Mão vazia", 0);
-        tiposVitorias.put("Pontos", 0);
-        for (Jogador jogador : jogadores) {
-            placar.put(jogador, tiposVitorias);
+    public Map<Integer, Map<Boolean, Integer>> getPlacar() {
+        return placar;
+    }
 
+    public Map<Boolean, Integer> getTiposVitorias() {
+        return tiposVitorias;
+    }
+
+    public void contagemPlacar(Integer jogadorId, Boolean vitoriaMaoVazia) {
+        tiposVitorias.computeIfPresent(vitoriaMaoVazia, (k, v) -> v + 1);
+
+        Map<Boolean, Integer> tiposVitoriasJogador = placar.get(jogadorId);
+        tiposVitoriasJogador.computeIfPresent(vitoriaMaoVazia, (k, v) -> v + 1);
+    }
+
+    private Integer calculaEspacoAmostral() {
+        return tiposVitorias.entrySet()
+                .stream()
+                .mapToInt((entry) -> entry.getValue())
+                .sum();
+    }
+
+    private String porcentagem(double totalEvento, Integer espacoAmostral) {
+        return (100 * totalEvento / espacoAmostral) + "%";
+    }
+
+    private void mostraPlacarIndividual(Entry<Integer, Map<Boolean, Integer>> estatisticasJogador) {
+        Integer totalVitorias = (estatisticasJogador.getValue().get(true) + estatisticasJogador.getValue().get(false));
+
+        System.out.println("Joagador " + estatisticasJogador.getKey() + ": ");
+        System.out
+                .println("Total vitórias: "
+                        + totalVitorias + "(" + porcentagem(totalVitorias, calculaEspacoAmostral()) + ")");
+    }
+
+    private void mostraPlacarTipoVitoria(Entry<Boolean, Integer> tiposVitoria, Integer n) {
+
+        if (tiposVitoria.getKey()) {
+            System.out.println("Vitorias por mão vazia: " + tiposVitoria.getValue() + "("
+                    + porcentagem(tiposVitoria.getValue(), n) + ")");
+        } else {
+            System.out.println("Vitorias por pontos: " + tiposVitoria.getValue() + "("
+                    + porcentagem(tiposVitoria.getValue(), n) + ")");
+        }
+    }
+
+    // Mostrar porcentagem ao lado do total
+    public void mostraPlacarFull() {
+        System.out.println("Placar:");
+        for (Map.Entry<Integer, Map<Boolean, Integer>> estJogador : placar.entrySet()) {
+            mostraPlacarIndividual(estJogador);
+            Integer n = estJogador.getValue().entrySet()
+                    .stream()
+                    .mapToInt((entry) -> entry.getValue())
+                    .sum();
+
+            for (Map.Entry<Boolean, Integer> tiposVitoria : estJogador.getValue().entrySet()) {
+                mostraPlacarTipoVitoria(tiposVitoria, n);
+            }
+            System.out.println();
+        }
+
+        System.out.println("Total de vitórias por tipo:");
+        for (Map.Entry<Boolean, Integer> tiposVitoria : tiposVitorias.entrySet()) {
+            mostraPlacarTipoVitoria(tiposVitoria, calculaEspacoAmostral());
         }
     }
 
