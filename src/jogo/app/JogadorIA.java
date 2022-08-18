@@ -1,3 +1,5 @@
+package jogo.app;
+
 import java.util.List;
 
 public class JogadorIA implements Jogador {

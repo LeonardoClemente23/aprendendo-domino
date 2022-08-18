@@ -1,3 +1,6 @@
+package jogo.app;
+
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -27,14 +30,18 @@ public class Estatisticas {
         return tiposVitorias;
     }
 
-    public void contagemPlacar(Integer jogadorId, Boolean vitoriaMaoVazia) {
+    public Map<Boolean, Integer> getTiposVitoriasJogador(int idJogador) {
+        return placar.get(idJogador);
+    }
+
+    public void contagemPlacar(Boolean vitoriaMaoVazia, int idJogador) {
         tiposVitorias.computeIfPresent(vitoriaMaoVazia, (k, v) -> v + 1);
 
-        Map<Boolean, Integer> tiposVitoriasJogador = placar.get(jogadorId);
+        Map<Boolean, Integer> tiposVitoriasJogador = getTiposVitoriasJogador(idJogador);
         tiposVitoriasJogador.computeIfPresent(vitoriaMaoVazia, (k, v) -> v + 1);
     }
 
-    private Integer calculaEspacoAmostral() {
+    private Integer calculaTotalJogos() {
         return tiposVitorias.entrySet()
                 .stream()
                 .mapToInt((entry) -> entry.getValue())
@@ -42,7 +49,8 @@ public class Estatisticas {
     }
 
     private String porcentagem(double totalEvento, Integer espacoAmostral) {
-        return (100 * totalEvento / espacoAmostral) + "%";
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(100 * totalEvento / espacoAmostral) + "%";
     }
 
     private void mostraPlacarIndividual(Entry<Integer, Map<Boolean, Integer>> estatisticasJogador) {
@@ -51,7 +59,7 @@ public class Estatisticas {
         System.out.println("Joagador " + estatisticasJogador.getKey() + ": ");
         System.out
                 .println("Total vitórias: "
-                        + totalVitorias + "(" + porcentagem(totalVitorias, calculaEspacoAmostral()) + ")");
+                        + totalVitorias + "(" + porcentagem(totalVitorias, calculaTotalJogos()) + ")");
     }
 
     private void mostraPlacarTipoVitoria(Entry<Boolean, Integer> tiposVitoria, Integer n) {
@@ -83,7 +91,7 @@ public class Estatisticas {
 
         System.out.println("Total de vitórias por tipo:");
         for (Map.Entry<Boolean, Integer> tiposVitoria : tiposVitorias.entrySet()) {
-            mostraPlacarTipoVitoria(tiposVitoria, calculaEspacoAmostral());
+            mostraPlacarTipoVitoria(tiposVitoria, calculaTotalJogos());
         }
     }
 

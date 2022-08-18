@@ -1,3 +1,4 @@
+package jogo.app;
 
 // Tendencia do jogador que começa, ganhar.
 
@@ -9,7 +10,7 @@ public class App {
         while (true) {
             Jogo jogo = new Jogo(true);
             jogo.rolandoJogo();
-            estatisticas.contagemPlacar(jogo.getVencedor().getId(), jogo.isVitoriaMaoVazia());
+            estatisticas.contagemPlacar(jogo.isVitoriaMaoVazia(), jogo.getVencedor().getId());
             contador++;
             if (contador == 1000000) {
                 break;

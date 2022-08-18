@@ -1,22 +1,12 @@
+package jogo.app;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class JogadorBurro implements Jogador {
-    private int id;
-
+public class JogadorReal implements Jogador {
+    private int id = -1;
     private List<List<Integer>> pecasJogador = new ArrayList<>();
     private boolean primeiroJogador;
-
-    public JogadorBurro(int id) {
-        this.primeiroJogador = false;
-        this.id = id;
-
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
 
     @Override
     public List<Integer> escolhePeca(int posicao) {
@@ -49,7 +39,11 @@ public class JogadorBurro implements Jogador {
     }
 
     @Override
-    public String toString() {
-        return "Jogador " + this.id;
+    public int getId() {
+        return id;
+    }
+
+    public List<List<Integer>> getPecasJogador() {
+        return pecasJogador;
     }
 }
