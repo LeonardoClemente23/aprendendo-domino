@@ -14,7 +14,7 @@ public class Estatisticas {
     public Estatisticas() {
         tiposVitorias.put(true, 0);
         tiposVitorias.put(false, 0);
-        for (int jogadorId = 1; jogadorId <= 4; jogadorId++) {
+        for (int jogadorId = 0; jogadorId < 4; jogadorId++) {
             Map<Boolean, Integer> tiposVitoriasJogador = new HashMap<>();
             tiposVitoriasJogador.put(true, 0);
             tiposVitoriasJogador.put(false, 0);
@@ -56,7 +56,7 @@ public class Estatisticas {
     private void mostraPlacarIndividual(Entry<Integer, Map<Boolean, Integer>> estatisticasJogador) {
         Integer totalVitorias = (estatisticasJogador.getValue().get(true) + estatisticasJogador.getValue().get(false));
 
-        System.out.println("Joagador " + estatisticasJogador.getKey() + ": ");
+        System.out.println("Joagador " + (estatisticasJogador.getKey() + 1) + ": ");
         System.out
                 .println("Total vitórias: "
                         + totalVitorias + "(" + porcentagem(totalVitorias, calculaTotalJogos()) + ")");

@@ -12,22 +12,30 @@ public class Jogo {
     private Tabuleiro tabuleiro;
     private Jogador vencedor = null;
     private int rodada = 1;
+    private Jogador primeiroJogador = null;
+
     private boolean vitoriaMaoVazia;
+
+    public Jogo(boolean dummyGame, int idPrimeiroJogador) {
+        this.tabuleiro = new Tabuleiro();
+        if (dummyGame) {
+            for (int i = 0; i < 4; i++) {
+                Jogador jogador = new JogadorBurro(i);
+                jogadores.add(jogador);
+            }
+        }
+        this.primeiroJogador = jogadores.get(idPrimeiroJogador);
+        this.primeiroJogador.setPrimeiroJogador(true);
+        geraPecas();
+        distribuiPecas();
+    }
 
     public boolean isVitoriaMaoVazia() {
         return vitoriaMaoVazia;
     }
 
-    public Jogo(boolean dummyGame) {
-        this.tabuleiro = new Tabuleiro();
-        if (dummyGame) {
-            for (int i = 1; i <= 4; i++) {
-                Jogador jogador = new JogadorBurro(i);
-                jogadores.add(jogador);
-            }
-        }
-        geraPecas();
-        distribuiPecas();
+    public Jogador getPrimeiroJogador() {
+        return this.primeiroJogador;
     }
 
     public Tabuleiro getTabuleiro() {
@@ -83,17 +91,17 @@ public class Jogo {
     }
 
     private void primeiraJogada() {
-        Jogador primeiroJogador = this.jogadores.get(0);
-        List<Integer> primeiraPeca = Regras.primeiraPecaJogada(primeiroJogador);
-
+        List<Integer> primeiraPeca = Regras.primeiraPecaJogada(this.primeiroJogador);
         colocaPecaTabuleiro(primeiroJogador, primeiraPeca);
-        primeiroJogador.setPrimeiroJogador(true);
+
     }
 
     private Jogador rodada() {
-        for (Jogador jogador : this.jogadores) {
+        for (int i = 0; i < 4; i++) {
+            int idJogador = (i + primeiroJogador.getId()) % 4;
+            Jogador jogador = this.jogadores.get(idJogador);
             if (jogador.getPrimeiroJogador() && rodada == 1) {
-                continue;
+                primeiraJogada();
             }
             if (Regras.vencedorMaoVazia(jogador)) {
                 this.fimJogo = true;
@@ -117,7 +125,6 @@ public class Jogo {
     }
 
     public void rolandoJogo() {
-        primeiraJogada();
 
         while (!fimJogo) {
             vencedor = rodada();
