@@ -8,6 +8,9 @@ import java.util.Map.Entry;
 public class Estatisticas {
     // Contabiliza quantidade de vitorias de cada jogador e o tipo de vitoria,
     // por mão vazia ou por pontos.
+
+    // TODO relatório estatístico
+
     private static Map<Integer, Map<Boolean, Integer>> placar = new HashMap<>();
     private static Map<Boolean, Integer> tiposVitorias = new HashMap<>();
 

@@ -34,7 +34,7 @@ public class Jogo {
         return vitoriaMaoVazia;
     }
 
-    public Jogador getPrimeiroJogador() {
+    public Jogador isPrimeiroJogador() {
         return this.primeiroJogador;
     }
 
@@ -69,7 +69,7 @@ public class Jogo {
 
     private List<Integer> pecaJogada(Jogador jogador) {
         for (List<Integer> possivelPeca : jogador.olhaMao()) {
-            if (Regras.validaPeca(possivelPeca, tabuleiro)) {
+            if (Regras.validaPeca(possivelPeca, this.tabuleiro)) {
                 return possivelPeca;
             }
         }
@@ -78,6 +78,7 @@ public class Jogo {
 
     private void colocaPecaTabuleiro(Jogador jogador, List<Integer> peca) {
         this.tabuleiro.adicionaPeca(peca);
+        this.tabuleiro.setUltimaPeca(peca);
         jogador.tiraPeca(peca);
 
     }
@@ -100,7 +101,8 @@ public class Jogo {
         for (int i = 0; i < 4; i++) {
             int idJogador = (i + primeiroJogador.getId()) % 4;
             Jogador jogador = this.jogadores.get(idJogador);
-            if (jogador.getPrimeiroJogador() && rodada == 1) {
+
+            if (jogador.isPrimeiroJogador() && rodada == 1) {
                 primeiraJogada();
             }
             if (Regras.vencedorMaoVazia(jogador)) {
@@ -116,23 +118,28 @@ public class Jogo {
         return null;
     }
 
-    private void verificaFimJogo() {
-        this.fimJogo = true;
-        if (Regras.rodadaPossivel(tabuleiro, jogadores)) {
-            this.fimJogo = false;
-            return;
+    private boolean verificaFimJogo() {
+        if (Regras.rodadaPossivel(this.tabuleiro, jogadores)) {
+            return false;
         }
+        if (Regras.possivelAbrirJogo(this.tabuleiro)) {
+            this.tabuleiro.abreJogo();
+            if (Regras.rodadaPossivel(this.tabuleiro, jogadores)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void rolandoJogo() {
 
-        while (!fimJogo) {
+        while (!this.fimJogo) {
             vencedor = rodada();
             if (vencedor != null) {
                 vitoriaMaoVazia = true;
                 break;
             }
-            verificaFimJogo();
+            this.fimJogo = verificaFimJogo();
         }
         if (vencedor == null) {
             vitoriaMaoVazia = false;

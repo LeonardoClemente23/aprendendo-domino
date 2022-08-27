@@ -46,7 +46,7 @@ public class JogadorBurro implements Jogador {
     }
 
     @Override
-    public boolean getPrimeiroJogador() {
+    public boolean isPrimeiroJogador() {
         return primeiroJogador;
     }
 

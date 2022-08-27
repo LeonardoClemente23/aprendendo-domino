@@ -35,7 +35,7 @@ public class JogadorIA implements Jogador {
     }
 
     @Override
-    public boolean getPrimeiroJogador() {
+    public boolean isPrimeiroJogador() {
         // TODO Auto-generated method stub
         return false;
     }

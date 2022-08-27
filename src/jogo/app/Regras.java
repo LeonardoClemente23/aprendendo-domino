@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Regras {
+    // TODO implementar o abrir o jogo
 
     public static List<Integer> primeiraPecaJogada(Jogador jogador) {
         int maiorSomaPeca = 0;
@@ -52,8 +53,10 @@ public class Regras {
         for (Jogador jogador : jogadores) {
             if (Regras.temPecaJogavel(jogador, tabuleiro)) {
                 return true;
-
             }
+        }
+        if (possivelAbrirJogo(tabuleiro)) {
+
         }
         return false;
     }
@@ -80,6 +83,13 @@ public class Regras {
         }
         return possivelVencedor;
 
+    }
+
+    public static boolean possivelAbrirJogo(Tabuleiro tabuleiro) {
+        if (tabuleiro.getCabeca() == tabuleiro.getRabo()) {
+            return true;
+        }
+        return false;
     }
 
     private static int somaPontos(Jogador jogador) {

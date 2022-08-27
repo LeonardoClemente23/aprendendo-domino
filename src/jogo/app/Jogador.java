@@ -16,6 +16,6 @@ public interface Jogador {
 
     public void setPrimeiroJogador(boolean primeirojogador);
 
-    public boolean getPrimeiroJogador();
+    public boolean isPrimeiroJogador();
 
 }
