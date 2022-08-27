@@ -104,14 +104,16 @@ public class Jogo {
 
             if (jogador.isPrimeiroJogador() && rodada == 1) {
                 primeiraJogada();
-            }
-            if (Regras.vencedorMaoVazia(jogador)) {
-                this.fimJogo = true;
-                return jogador;
+                continue;
             }
 
             if (Regras.temPecaJogavel(jogador, this.tabuleiro)) {
                 jogada(jogador);
+            }
+
+            if (Regras.vencedorMaoVazia(jogador)) {
+                this.fimJogo = true;
+                return jogador;
             }
         }
         this.rodada++;
