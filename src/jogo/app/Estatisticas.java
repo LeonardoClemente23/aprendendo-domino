@@ -1,7 +1,9 @@
 package jogo.app;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -9,10 +11,9 @@ public class Estatisticas {
     // Contabiliza quantidade de vitorias de cada jogador e o tipo de vitoria,
     // por mão vazia ou por pontos.
 
-    // TODO relatório estatístico
-
-    private static Map<Integer, Map<Boolean, Integer>> placar = new HashMap<>();
-    private static Map<Boolean, Integer> tiposVitorias = new HashMap<>();
+    private Map<Integer, Map<Boolean, Integer>> placar = new HashMap<>();
+    private Map<Boolean, Integer> tiposVitorias = new HashMap<>();
+    private List<String> dados = new ArrayList<>();
 
     public Estatisticas() {
         tiposVitorias.put(true, 0);
@@ -23,6 +24,14 @@ public class Estatisticas {
             tiposVitoriasJogador.put(false, 0);
             placar.put(jogadorId, tiposVitoriasJogador);
         }
+    }
+
+    public List<String> getDados() {
+        return dados;
+    }
+
+    public void setDados(List<String> dados) {
+        this.dados = dados;
     }
 
     public Map<Integer, Map<Boolean, Integer>> getPlacar() {
@@ -59,26 +68,29 @@ public class Estatisticas {
     private void mostraPlacarIndividual(Entry<Integer, Map<Boolean, Integer>> estatisticasJogador) {
         Integer totalVitorias = (estatisticasJogador.getValue().get(true) + estatisticasJogador.getValue().get(false));
 
-        System.out.println("Joagador " + (estatisticasJogador.getKey() + 1) + ": ");
-        System.out
-                .println("Total vitórias: "
-                        + totalVitorias + "(" + porcentagem(totalVitorias, calculaTotalJogos()) + ")");
+        this.dados.add("Joagador " + (estatisticasJogador.getKey() + 1) + ": ");
+        this.dados.add("Total vitórias: "
+                + totalVitorias + "(" + porcentagem(totalVitorias, calculaTotalJogos()) + ")");
+
     }
 
     private void mostraPlacarTipoVitoria(Entry<Boolean, Integer> tiposVitoria, Integer n) {
 
         if (tiposVitoria.getKey()) {
-            System.out.println("Vitorias por mão vazia: " + tiposVitoria.getValue() + "("
+            this.dados.add("Vitorias por mão vazia: " + tiposVitoria.getValue() + "("
                     + porcentagem(tiposVitoria.getValue(), n) + ")");
+
         } else {
-            System.out.println("Vitorias por pontos: " + tiposVitoria.getValue() + "("
+            this.dados.add("Vitorias por pontos: " + tiposVitoria.getValue() + "("
                     + porcentagem(tiposVitoria.getValue(), n) + ")");
+
         }
     }
 
     // Mostrar porcentagem ao lado do total
     public void mostraPlacarFull() {
-        System.out.println("Placar:");
+        this.dados.add("");
+        this.dados.add("Placar:");
         for (Map.Entry<Integer, Map<Boolean, Integer>> estJogador : placar.entrySet()) {
             mostraPlacarIndividual(estJogador);
             Integer n = estJogador.getValue().entrySet()
@@ -89,13 +101,14 @@ public class Estatisticas {
             for (Map.Entry<Boolean, Integer> tiposVitoria : estJogador.getValue().entrySet()) {
                 mostraPlacarTipoVitoria(tiposVitoria, n);
             }
-            System.out.println();
+            this.dados.add("");
         }
 
-        System.out.println("Total de vitórias por tipo:");
+        this.dados.add("Total de vitórias por tipo:");
         for (Map.Entry<Boolean, Integer> tiposVitoria : tiposVitorias.entrySet()) {
             mostraPlacarTipoVitoria(tiposVitoria, calculaTotalJogos());
         }
+        this.dados.add("");
     }
 
 }

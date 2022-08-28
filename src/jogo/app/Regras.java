@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Regras {
-    // TODO implementar o abrir o jogo
 
     public static List<Integer> primeiraPecaJogada(Jogador jogador) {
         int maiorSomaPeca = 0;

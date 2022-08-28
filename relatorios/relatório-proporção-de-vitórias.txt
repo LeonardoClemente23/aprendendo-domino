@@ -1,129 +1,118 @@
 Estatística dos jogos:
 
-Total de jogos: 1.000.000
+Total de jogos: 4.000.000
 
-1º grupo de Condições: 
-    - Peças jogadas aleatoriamente, respeitando as regras;
-    - Cada jogo sempre começa com o jogador 1.
+Índice situações:
+   1 - Todos os jogos começam pelo mesmo jogador (1)
+   2 - O jogador que começa é aleatório
+   3 - Em cada jogo, o primeiro a jogar é o que está à esquerda do vencedor do jogo anterior.
+   4 - Em cada jogo, o primeiro a jogar é o que está à esquerda de quem começou o jogo anterior.
 
-Tempo de execução: 5803 milissegundos.
-Placar:     
+1ª situação:
+
+Placar:
 Joagador 1: 
-Total vitórias: 568801(56,88%)        
-Vitorias por pontos: 278520(48,97%)   
-Vitorias por mão vazia: 290281(51,03%)
+Total vitórias: 431736(43,17%)
+Vitorias por pontos: 36840(8,53%)
+Vitorias por mão vazia: 394896(91,47%)
 
 Joagador 2: 
-Total vitórias: 181337(18,13%)        
-Vitorias por pontos: 95877(52,87%)    
-Vitorias por mão vazia: 85460(47,13%)
+Total vitórias: 221755(22,18%)
+Vitorias por pontos: 28988(13,07%)
+Vitorias por mão vazia: 192767(86,93%)
 
-Joagador 3:
-Total vitórias: 143935(14,39%)
-Vitorias por pontos: 63172(43,89%)
-Vitorias por mão vazia: 80763(56,11%)
+Joagador 3: 
+Total vitórias: 195906(19,59%)
+Vitorias por pontos: 25761(13,15%)
+Vitorias por mão vazia: 170145(86,85%)
 
-Joagador 4:
-Total vitórias: 105927(10,59%)
-Vitorias por pontos: 41506(39,18%)
-Vitorias por mão vazia: 64421(60,82%)
+Joagador 4: 
+Total vitórias: 150603(15,06%)
+Vitorias por pontos: 21746(14,44%)
+Vitorias por mão vazia: 128857(85,56%)
 
 Total de vitórias por tipo:
-Vitorias por pontos: 479075(47,91%)
-Vitorias por mão vazia: 520925(52,09%)
+Vitorias por pontos: 113335(11,33%)
+Vitorias por mão vazia: 886665(88,67%)
 
-=============================================================
+2ª situação:
 
-2º grupo de Condições: 
-    - Peças jogadas aleatoriamente, respeitando as regras;
-    - Cada jogo começa com jogador aleatório.
-
-Tempo de execução: 4127 milissegundos.
 Placar:
-Joagador 1:
-Total vitórias: 317378(31,74%)
-Vitorias por pontos: 186853(58,87%)
-Vitorias por mão vazia: 130525(41,13%)
+Joagador 1: 
+Total vitórias: 683215(34,16%)
+Vitorias por pontos: 67180(9,83%)
+Vitorias por mão vazia: 616035(90,17%)
 
-Joagador 2:
-Total vitórias: 256456(25,65%)
-Vitorias por pontos: 125710(49,02%)
-Vitorias por mão vazia: 130746(50,98%)
+Joagador 2: 
+Total vitórias: 472511(23,63%)
+Vitorias por pontos: 57916(12,26%)
+Vitorias por mão vazia: 414595(87,74%)
 
-Joagador 3:
-Total vitórias: 222322(22,23%)
-Vitorias por pontos: 92659(41,68%)
-Vitorias por mão vazia: 129663(58,32%)
+Joagador 3: 
+Total vitórias: 445354(22,27%)
+Vitorias por pontos: 53329(11,97%)
+Vitorias por mão vazia: 392025(88,03%)
 
-Joagador 4:
-Total vitórias: 203844(20,38%)
-Vitorias por pontos: 73799(36,20%)
-Vitorias por mão vazia: 130045(63,80%)
+Joagador 4: 
+Total vitórias: 398920(19,95%)
+Vitorias por pontos: 48262(12,10%)
+Vitorias por mão vazia: 350658(87,90%)
 
 Total de vitórias por tipo:
-Vitorias por pontos: 479021(47,90%)
-Vitorias por mão vazia: 520979(52,10%)
+Vitorias por pontos: 226687(11,33%)
+Vitorias por mão vazia: 1773313(88,67%)
 
-========================================================
+3ª situação:
 
-3º grupo de Condições: 
-    - Peças jogadas aleatoriamente, respeitando as regras;
-    - Em cada jogo, o primeiro a jogar é o que está à esquerda do vencedor do jogo anterior.
-
-Tempo de execução: 6380 milissegundos.
 Placar:
-Joagador 1:
-Total vitórias: 299385(29,94%)
-Vitorias por pontos: 179647(60,01%)
-Vitorias por mão vazia: 119738(39,99%)
+Joagador 1: 
+Total vitórias: 934652(31,16%)
+Vitorias por pontos: 97499(10,43%)
+Vitorias por mão vazia: 837153(89,57%)
 
-Joagador 2:
-Total vitórias: 270901(27,09%)
-Vitorias por pontos: 130536(48,19%)
-Vitorias por mão vazia: 140365(51,81%)
+Joagador 2: 
+Total vitórias: 722942(24,10%)
+Vitorias por pontos: 86850(12,01%)
+Vitorias por mão vazia: 636092(87,99%)
 
-Joagador 3:
-Total vitórias: 229417(22,94%)
-Vitorias por pontos: 94805(41,32%)
-Vitorias por mão vazia: 134612(58,68%)
+Joagador 3: 
+Total vitórias: 695196(23,17%)
+Vitorias por pontos: 81144(11,67%)
+Vitorias por mão vazia: 614052(88,33%)
 
-Joagador 4:
-Total vitórias: 200297(20,03%)
-Vitorias por pontos: 73059(36,48%)
-Vitorias por mão vazia: 127238(63,52%)
+Joagador 4: 
+Total vitórias: 647210(21,57%)
+Vitorias por pontos: 74713(11,54%)
+Vitorias por mão vazia: 572497(88,46%)
 
 Total de vitórias por tipo:
-Vitorias por pontos: 478047(47,80%)
-Vitorias por mão vazia: 521953(52,20%)
+Vitorias por pontos: 340206(11,34%)
+Vitorias por mão vazia: 2659794(88,66%)
 
-=========================================================
+4ª situação:
 
-4º grupo de Condições: 
-    - Peças jogadas aleatoriamente, respeitando as regras;
-    - Em cada jogo, o primeiro a jogar é o que está à esquerda de quem começou o jogo anterior.
-
-Tempo de execução: 4878 milissegundos.
 Placar:
-Joagador 1:
-Total vitórias: 316207(31,62%)
-Vitorias por pontos: 185912(58,79%)
-Vitorias por mão vazia: 130295(41,21%)
+Joagador 1: 
+Total vitórias: 1186308(29,66%)
+Vitorias por pontos: 127830(10,78%)
+Vitorias por mão vazia: 1058478(89,22%)
 
-Joagador 2:
-Total vitórias: 256479(25,65%)
-Vitorias por pontos: 126046(49,14%)
-Vitorias por mão vazia: 130433(50,86%)
+Joagador 2: 
+Total vitórias: 973211(24,33%)
+Vitorias por pontos: 115570(11,88%)
+Vitorias por mão vazia: 857641(88,12%)
 
-Joagador 3:
-Total vitórias: 222979(22,30%)
-Vitorias por pontos: 92441(41,46%)
-Vitorias por mão vazia: 130538(58,54%)
+Joagador 3: 
+Total vitórias: 944721(23,62%)
+Vitorias por pontos: 108834(11,52%)
+Vitorias por mão vazia: 835887(88,48%)
 
-Joagador 4:
-Total vitórias: 204335(20,43%)
-Vitorias por pontos: 74094(36,26%)
-Vitorias por mão vazia: 130241(63,74%)
+Joagador 4: 
+Total vitórias: 895760(22,39%)
+Vitorias por pontos: 101468(11,33%)
+Vitorias por mão vazia: 794292(88,67%)
 
 Total de vitórias por tipo:
-Vitorias por pontos: 478493(47,85%)
-Vitorias por mão vazia: 521507(52,15%)
+Vitorias por pontos: 453702(11,34%)
+Vitorias por mão vazia: 3546298(88,66%)
+
