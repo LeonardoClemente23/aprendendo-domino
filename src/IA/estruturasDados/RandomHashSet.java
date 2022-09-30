@@ -1,4 +1,4 @@
-package IA.app;
+package IA.estruturasDados;
 
 import java.util.ArrayList;
 import java.util.HashSet;
