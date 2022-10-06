@@ -59,7 +59,7 @@ public class RandomHashSet<T> {
         data.remove(object);
     }
 
-    private int size() {
+    public int size() {
         return data.size();
     }
 }

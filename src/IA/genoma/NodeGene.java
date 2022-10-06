@@ -4,7 +4,7 @@ public class NodeGene extends Gene {
     private double x, y;
 
     public NodeGene(int innovationNumber) {
-        super(innovationNumber);
+        setInnovationNumber(innovationNumber);
     }
 
     public double getX() {

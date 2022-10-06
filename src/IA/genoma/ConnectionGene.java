@@ -2,7 +2,7 @@ package IA.genoma;
 
 import IA.NEAT.Neat;
 
-public class ConnectionGene {
+public class ConnectionGene extends Gene {
     private NodeGene from;
     private NodeGene to;
 
@@ -12,6 +12,7 @@ public class ConnectionGene {
     public ConnectionGene(NodeGene from, NodeGene to) {
         this.from = from;
         this.to = to;
+        setInnovationNumber(innovationNumber);
     }
 
     public NodeGene getFrom() {
