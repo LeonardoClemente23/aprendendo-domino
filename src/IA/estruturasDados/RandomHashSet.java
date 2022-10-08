@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
-public class RandomHashSet<T> {
+import IA.genoma.Gene;
+
+public class RandomHashSet<T extends Gene> {
     HashSet<T> set = new HashSet<>();
     ArrayList<T> data = new ArrayList<>();
 
@@ -30,6 +32,20 @@ public class RandomHashSet<T> {
             set.add(object);
             data.add(object);
         }
+
+    }
+
+    public void addSorted(T object) {
+        for (int i = 0; i < this.size(); i++) {
+            int innovation = (data.get(i)).getInnovationNumber();
+            if (object.getInnovationNumber() < innovation) {
+                data.add(i, object);
+                set.add(object);
+                return;
+            }
+        }
+        data.add(object);
+        set.add(object);
     }
 
     public void clear() {

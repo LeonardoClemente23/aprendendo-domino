@@ -11,6 +11,8 @@ public class Neat {
 
     public static final int MAX_NODES = (int) Math.pow(2, 20);
 
+    private double c1 = 1, c2 = 1, c3 = 1;
+
     private HashMap<ConnectionGene, ConnectionGene> allConnections = new HashMap<>();
     private RandomHashSet<NodeGene> allNodes = new RandomHashSet<>();
     private int maxClients;
@@ -19,6 +21,39 @@ public class Neat {
 
     public Neat(int maxClients, int inputSize, int outputSize) {
         this.reset(maxClients, inputSize, outputSize);
+    }
+
+    public double getC1() {
+        return c1;
+    }
+
+    public double getC2() {
+        return c2;
+    }
+
+    public double getC3() {
+        return c3;
+    }
+
+    public int getInputSize() {
+        return inputSize;
+    }
+
+    public int getOutputSize() {
+        return outputSize;
+    }
+
+    public NodeGene getNode() {
+        NodeGene node = new NodeGene(allNodes.size() + 1);
+        allNodes.add(node);
+        return node;
+    }
+
+    public NodeGene getNode(int id) throws Exception {
+        if (id <= allNodes.size()) {
+            return allNodes.getElement(id - 1);
+        }
+        return getNode();
     }
 
     public void reset(int maxClients, int inputSize, int outputSize) {
@@ -62,17 +97,11 @@ public class Neat {
         return connectionGene;
     }
 
-    public NodeGene getNode() {
-        NodeGene node = new NodeGene(allNodes.size() + 1);
-        allNodes.add(node);
-        return node;
-    }
-
-    public NodeGene getNode(int id) throws Exception {
-        if (id <= allNodes.size()) {
-            return allNodes.getElement(id - 1);
-        }
-        return getNode();
+    public ConnectionGene getConnection(ConnectionGene connection) {
+        ConnectionGene connectionGene = new ConnectionGene(connection.getFrom(), connection.getTo());
+        connectionGene.setWeight(connection.getWeight());
+        connectionGene.setEnabled(connection.isEnabled());
+        return connectionGene;
     }
 
     public static void main(String[] args) {
